@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - MediumClone</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="container py-12">
+        <div class="max-w-[800px] mx-auto" style="max-width: 800px; margin: 0 auto;">
+            <h1 class="font-serif mb-8" style="font-size: 2.5rem;">Settings</h1>
+            
+            <div class="flex" style="gap: 4rem;">
+                <!-- Sidebar -->
+                <div style="width: 200px;">
+                    <div class="flex flex-col gap-2">
+                        <a href="#" class="font-bold text-primary" style="padding: 0.5rem 0;">Account</a>
+                        <a href="#" class="text-secondary hover:text-primary" style="padding: 0.5rem 0;">Publishing</a>
+                        <a href="#" class="text-secondary hover:text-primary" style="padding: 0.5rem 0;">Notifications</a>
+                        <a href="#" class="text-secondary hover:text-primary" style="padding: 0.5rem 0;">Membership</a>
+                        <a href="#" class="text-secondary hover:text-primary" style="padding: 0.5rem 0;">Security</a>
+                    </div>
+                </div>
+                
+                <!-- Content -->
+                <div class="flex-1">
+                    <h2 class="font-bold mb-6 text-xl">Account Information</h2>
+                    
+                    <div class="mb-8 p-6" style="border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+                        <div class="flex justify-between items-center mb-4 pb-4" style="border-bottom: 1px solid var(--border-color);">
+                            <div>
+                                <h3 class="font-bold mb-1">Email address</h3>
+                                <p class="text-sm text-secondary">your@email.com</p>
+                            </div>
+                            <button class="btn btn-outline text-sm">Edit</button>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mb-4 pb-4" style="border-bottom: 1px solid var(--border-color);">
+                            <div>
+                                <h3 class="font-bold mb-1">Username</h3>
+                                <p class="text-sm text-secondary">@username</p>
+                            </div>
+                            <button class="btn btn-outline text-sm">Edit</button>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="font-bold mb-1">Profile Information</h3>
+                                <p class="text-sm text-secondary">Edit your photo, name, bio, etc.</p>
+                            </div>
+                            <button class="btn btn-outline text-sm">Edit</button>
+                        </div>
+                    </div>
+                    
+                    <h2 class="font-bold mb-6 text-xl">Appearance</h2>
+                    <div class="mb-8 p-6" style="border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="font-bold mb-1">Theme</h3>
+                                <p class="text-sm text-secondary">Toggle dark/light mode via the navbar or here.</p>
+                            </div>
+                            <button id="settings-theme-toggle" class="btn btn-outline text-sm">Toggle Theme</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 text-center text-sm text-secondary">
+                        <button id="logout-btn-settings" class="text-danger hover:underline">Log out of all devices</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('settings-theme-toggle');
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', () => {
+                    const themeBtn = document.getElementById('theme-toggle');
+                    if (themeBtn) themeBtn.click();
+                });
+            }
+            
+            const logoutBtn = document.getElementById('logout-btn-settings');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('user');
+                    window.location.href = '../index.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

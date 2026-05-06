@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - MediumClone</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="container py-12">
+        <div class="text-center mb-12">
+            <h1 class="font-serif mb-4" style="font-size: 3rem;" id="category-title">Explore Topics</h1>
+            <p class="text-secondary text-lg" id="category-subtitle">Discover stories based on your interests.</p>
+        </div>
+
+        <div id="all-categories" class="flex flex-wrap justify-center gap-3 mb-12">
+            <!-- Populated by JS -->
+        </div>
+        
+        <div class="divider"></div>
+
+        <div id="category-blogs" class="flex flex-col gap-6 max-w-[800px] mx-auto" style="max-width: 800px; margin: 0 auto;">
+            <!-- Injected via JS -->
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const tagContainer = document.getElementById('all-categories');
+            const blogsContainer = document.getElementById('category-blogs');
+            const titleEl = document.getElementById('category-title');
+            const subtitleEl = document.getElementById('category-subtitle');
+            
+            const currentTag = getQueryParam('tag');
+            
+            try {
+                const blogs = await API.fetchBlogs();
+                
+                // Extract all unique tags
+                const allTags = [...new Set(blogs.flatMap(b => b.tags))].sort();
+                
+                tagContainer.innerHTML = allTags.map(tag => `
+                    <a href="categories.html?tag=${tag}" class="tag ${currentTag === tag ? 'bg-primary text-white' : ''}" style="${currentTag === tag ? 'background:var(--text-primary); color:var(--bg-color);' : 'background:var(--border-color); color:var(--text-primary);'} font-size: 1rem; padding: 0.5rem 1rem;">${tag}</a>
+                `).join('');
+                
+                let displayBlogs = blogs;
+                if (currentTag) {
+                    displayBlogs = blogs.filter(b => b.tags.includes(currentTag));
+                    titleEl.textContent = currentTag;
+                    subtitleEl.textContent = `Explore stories about ${currentTag}`;
+                }
+                
+                blogsContainer.innerHTML = displayBlogs.length > 0 
+                    ? displayBlogs.map(b => Components.renderBlogCard(b, true)).join('')
+                    : '<p class="text-center text-secondary">No stories found in this category.</p>';
+                    
+            } catch (e) {
+                blogsContainer.innerHTML = '<p>Failed to load.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

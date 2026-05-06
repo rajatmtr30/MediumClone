@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write - MediumClone</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+    <!-- Simple Navbar for Editor -->
+    <nav class="navbar" style="position: static; border-bottom: none;">
+        <div class="container-sm">
+            <div class="flex items-center justify-between w-full">
+                <div class="flex items-center gap-4">
+                    <a href="../index.html" class="nav-brand">MediumClone</a>
+                    <span class="text-sm text-secondary">Draft</span>
+                </div>
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">🌙</button>
+                    <button class="btn btn-primary" id="publish-btn" style="border-radius: var(--radius-full);">Publish</button>
+                    <button class="btn btn-ghost" style="border-radius: 50%; width: 40px; height: 40px; padding: 0;">⋯</button>
+                    <img src="https://i.pravatar.cc/150?u=user" alt="User" class="author-avatar" style="width: 32px; height: 32px; cursor: pointer;">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container-sm py-12">
+        <div class="editor-container">
+            <input type="text" id="editor-title" class="editor-title" placeholder="Title">
+            
+            <div id="editor-content" class="editor-content" contenteditable="true" data-placeholder="Tell your story..."></div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/components.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/editor.js"></script>
+</body>
+</html>

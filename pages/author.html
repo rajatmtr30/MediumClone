@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Profile - MediumClone</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="container py-12">
+        <div class="profile-header max-w-[800px] mx-auto" style="max-width: 800px; margin: 0 auto 3rem auto;">
+            <div class="profile-info">
+                <img id="author-avatar" src="" alt="Author" class="profile-avatar skeleton" style="object-fit: cover;">
+                <div>
+                    <h1 id="author-name" class="profile-name font-sans font-bold">Author Name</h1>
+                    <p id="author-bio" class="profile-bio">Author bio goes here...</p>
+                    <div class="flex items-center gap-4 text-sm text-secondary mb-4">
+                        <span><span class="font-bold text-primary">12.5K</span> Followers</span>
+                        <span><span class="font-bold text-primary">42</span> Following</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="btn btn-primary">Follow</button>
+                        <button class="btn btn-outline">✉️</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider max-w-[800px] mx-auto" style="max-width: 800px;"></div>
+
+        <div class="flex items-center gap-4 mb-6 max-w-[800px] mx-auto" style="max-width: 800px; border-bottom: 1px solid var(--border-color);">
+            <button class="btn btn-ghost" style="border-bottom: 2px solid var(--text-primary); border-radius: 0; padding-bottom: 1rem;">Home</button>
+            <button class="btn btn-ghost" style="padding-bottom: 1rem;">About</button>
+        </div>
+
+        <div id="author-blogs" class="flex flex-col gap-6 max-w-[800px] mx-auto" style="max-width: 800px; margin: 0 auto;">
+            <!-- Injected via JS -->
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const authorName = getQueryParam('id');
+            if (!authorName) {
+                window.location.href = '../index.html';
+                return;
+            }
+            
+            document.getElementById('author-name').textContent = authorName;
+            
+            const container = document.getElementById('author-blogs');
+            container.innerHTML = Array(2).fill(0).map(() => Components.renderSkeletonCard(true)).join('');
+            
+            try {
+                const blogs = await API.fetchBlogs();
+                const authorBlogs = blogs.filter(b => b.author.name === authorName);
+                
+                if (authorBlogs.length > 0) {
+                    const author = authorBlogs[0].author;
+                    document.getElementById('author-avatar').src = author.avatar;
+                    document.getElementById('author-avatar').classList.remove('skeleton');
+                    document.getElementById('author-bio').textContent = author.bio || 'Avid reader and writer on MediumClone.';
+                    
+                    container.innerHTML = authorBlogs.map(b => Components.renderBlogCard(b, true)).join('');
+                } else {
+                    container.innerHTML = '<p class="text-secondary">No stories published yet.</p>';
+                    // Fallback avatar
+                    document.getElementById('author-avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(authorName)}&background=random`;
+                    document.getElementById('author-avatar').classList.remove('skeleton');
+                }
+            } catch (e) {
+                container.innerHTML = '<p>Failed to load.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

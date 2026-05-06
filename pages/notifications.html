@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - MediumClone</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="container py-12">
+        <div class="max-w-[800px] mx-auto" style="max-width: 800px; margin: 0 auto;">
+            <h1 class="font-serif mb-8" style="font-size: 2.5rem;">Notifications</h1>
+            
+            <div class="flex items-center gap-4 mb-6" style="border-bottom: 1px solid var(--border-color);">
+                <button class="btn btn-ghost" style="border-bottom: 2px solid var(--text-primary); border-radius: 0; padding-bottom: 1rem;">All</button>
+                <button class="btn btn-ghost" style="padding-bottom: 1rem;">Responses</button>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <!-- Notification Items -->
+                <div class="p-4" style="border-bottom: 1px solid var(--border-color);">
+                    <div class="flex items-start gap-4">
+                        <img src="https://i.pravatar.cc/150?u=a" alt="User" class="author-avatar" style="width: 32px; height: 32px;">
+                        <div>
+                            <p class="mb-1"><span class="font-bold">Alex Smith</span> started following you</p>
+                            <span class="text-sm text-secondary">2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4" style="border-bottom: 1px solid var(--border-color);">
+                    <div class="flex items-start gap-4">
+                        <img src="https://i.pravatar.cc/150?u=b" alt="User" class="author-avatar" style="width: 32px; height: 32px;">
+                        <div>
+                            <p class="mb-1"><span class="font-bold">Sarah Connor</span> clapped for your story <a href="#" class="font-bold hover:underline">The Future of AI</a></p>
+                            <span class="text-sm text-secondary">5 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4" style="border-bottom: 1px solid var(--border-color);">
+                    <div class="flex items-start gap-4">
+                        <img src="https://i.pravatar.cc/150?u=c" alt="User" class="author-avatar" style="width: 32px; height: 32px;">
+                        <div>
+                            <p class="mb-1"><span class="font-bold">MediumClone Staff</span> highlighted a new feature: <a href="#" class="font-bold hover:underline">Dark Mode is here</a></p>
+                            <span class="text-sm text-secondary">1 day ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

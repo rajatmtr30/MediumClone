@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Back - MediumClone</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+        }
+        .auth-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            text-align: center;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+        .auth-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        .auth-btn {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--text-primary);
+            background: transparent;
+            color: var(--text-primary);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            transition: background 0.2s;
+        }
+        .auth-btn:hover {
+            background-color: var(--hover-bg);
+        }
+        .auth-link {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container animate-fade-in">
+        <h1 class="auth-title">Welcome back.</h1>
+        
+        <form id="login-form">
+            <div class="form-group text-left">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" id="email" class="form-control" required placeholder="you@example.com">
+            </div>
+            <div class="form-group text-left">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" id="password" class="form-control" required placeholder="••••••••">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem; border-radius: var(--radius-full); font-size: 1rem; margin-top: 1rem;">Sign In</button>
+        </form>
+
+        <div class="divider"></div>
+        
+        <button class="auth-btn">
+            <span style="font-size: 1.2rem;">G</span> Sign in with Google
+        </button>
+
+        <p class="mt-6 text-sm text-secondary">
+            No account? <a href="signup.html" class="auth-link">Create one</a>
+        </p>
+        <div class="mt-4">
+            <a href="../index.html" class="text-sm text-secondary hover:underline">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            // Simulate login
+            localStorage.setItem('user', JSON.stringify({
+                name: email.split('@')[0],
+                avatar: 'https://i.pravatar.cc/150?u=' + email
+            }));
+            window.location.href = '../index.html';
+        });
+    </script>
+</body>
+</html>

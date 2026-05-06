@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Articles - MediumClone</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="container py-12">
+        <div class="mb-8 max-w-[800px] mx-auto" style="max-width: 800px; margin: 0 auto;">
+            <h1 class="font-serif mb-2" style="font-size: 2.5rem;">Your library</h1>
+            <p class="text-secondary">Read your saved stories later.</p>
+        </div>
+
+        <div class="divider max-w-[800px] mx-auto" style="max-width: 800px;"></div>
+
+        <div id="saved-blogs" class="flex flex-col gap-6 max-w-[800px] mx-auto" style="max-width: 800px; margin: 0 auto;">
+            <!-- Injected via JS -->
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const container = document.getElementById('saved-blogs');
+            
+            // Re-render when storage changes (e.g. user clicks un-save)
+            const renderSaved = async () => {
+                const savedIds = JSON.parse(localStorage.getItem('savedBlogs') || '[]');
+                if (savedIds.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center py-12">
+                            <h2 class="font-bold text-xl mb-2">No saved stories yet</h2>
+                            <p class="text-secondary mb-4">Click the bookmark icon on any story to save it here.</p>
+                            <a href="../index.html" class="btn btn-outline">Explore stories</a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                try {
+                    const blogs = await API.fetchBlogs();
+                    const savedBlogs = blogs.filter(b => savedIds.includes(b.id));
+                    container.innerHTML = savedBlogs.map(b => Components.renderBlogCard(b, true)).join('');
+                } catch (e) {
+                    container.innerHTML = '<p>Failed to load.</p>';
+                }
+            };
+            
+            await renderSaved();
+            
+            // Listen for clicks on save buttons within this page to remove instantly
+            container.addEventListener('click', (e) => {
+                if (e.target.closest('.save-btn')) {
+                    setTimeout(renderSaved, 50); // slight delay to allow toggle logic in main.js to run first
+                }
+            });
+        });
+    </script>
+</body>
+</html>

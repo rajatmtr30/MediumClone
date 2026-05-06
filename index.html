@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediumClone - Where good ideas find you.</title>
+    <meta name="description"
+        content="MediumClone is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+
+<body>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content animate-fade-in">
+                <h1 class="hero-title">Stay curious.</h1>
+                <p class="hero-subtitle">Discover stories, thinking, and expertise from writers on any topic.</p>
+                <a href="pages/explore.html" class="btn btn-outline"
+                    style="background:white; color:var(--text-primary); border-color:white; padding: 0.75rem 1.5rem; font-size: 1.1rem; border-radius: 999px;">Start
+                    reading</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Section -->
+    <section class="py-8" style="border-bottom: 1px solid var(--border-color);">
+        <div class="container">
+            <div class="flex items-center gap-2 mb-6">
+                <span class="text-accent">📈</span>
+                <h2 class="font-bold text-lg mb-0">Trending on MediumClone</h2>
+            </div>
+            <div class="main-layout"
+                style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); padding: 0; gap: 2rem;">
+                <!-- Filled via JS -->
+                <div id="trending-list" class="w-full"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; grid-column: 1 / -1;">
+                    <!-- Skeletons could go here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Layout -->
+    <div class="container main-layout">
+        <!-- Left Column: Feed -->
+        <main>
+            <div class="flex items-center gap-4 mb-6" style="border-bottom: 1px solid var(--border-color);">
+                <button class="btn btn-ghost"
+                    style="border-bottom: 2px solid var(--text-primary); border-radius: 0; padding-bottom: 1rem;">For
+                    you</button>
+                <button class="btn btn-ghost" style="padding-bottom: 1rem;">Following</button>
+            </div>
+
+            <div id="featured-blogs" class="flex flex-col gap-4">
+                <!-- Blog cards injected via JS -->
+            </div>
+        </main>
+
+        <!-- Right Column: Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Discover more of what matters to you</h3>
+                <div class="tag-cloud">
+                    <a href="pages/categories.html?tag=programming" class="tag">Programming</a>
+                    <a href="pages/categories.html?tag=data-science" class="tag">Data Science</a>
+                    <a href="pages/categories.html?tag=technology" class="tag">Technology</a>
+                    <a href="pages/categories.html?tag=self-improvement" class="tag">Self Improvement</a>
+                    <a href="pages/categories.html?tag=writing" class="tag">Writing</a>
+                    <a href="pages/categories.html?tag=relationships" class="tag">Relationships</a>
+                    <a href="pages/categories.html?tag=machine-learning" class="tag">Machine Learning</a>
+                </div>
+                <div class="mt-4">
+                    <a href="pages/categories.html" class="text-accent text-sm hover:underline">See more topics</a>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Recommended Writers</h3>
+                <div id="recommended-writers" class="recommended-list">
+                    <div class="recommended-item">
+                        <img src="https://i.pravatar.cc/150?u=alice" alt="Alice" class="recommended-avatar">
+                        <div class="flex-1">
+                            <h4 class="recommended-title text-sm">Alice Johnson</h4>
+                            <p class="text-sm text-secondary">UI/UX Designer at Creative Studio.</p>
+                        </div>
+                        <button class="btn btn-outline text-sm" style="padding: 0.2rem 0.5rem">Follow</button>
+                    </div>
+                    <div class="recommended-item">
+                        <img src="https://i.pravatar.cc/150?u=john" alt="John" class="recommended-avatar">
+                        <div class="flex-1">
+                            <h4 class="recommended-title text-sm">John Smith</h4>
+                            <p class="text-sm text-secondary">JavaScript Purist.</p>
+                        </div>
+                        <button class="btn btn-outline text-sm" style="padding: 0.2rem 0.5rem">Follow</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="flex flex-wrap gap-3 text-sm text-secondary mt-6">
+                <a href="pages/about.html" class="hover:text-primary">Help</a>
+                <a href="#" class="hover:text-primary">Status</a>
+                <a href="pages/about.html" class="hover:text-primary">About</a>
+                <a href="#" class="hover:text-primary">Careers</a>
+                <a href="#" class="hover:text-primary">Blog</a>
+                <a href="#" class="hover:text-primary">Privacy</a>
+                <a href="#" class="hover:text-primary">Terms</a>
+                <a href="#" class="hover:text-primary">Text to speech</a>
+                <a href="#" class="hover:text-primary">Teams</a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="js/components.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/home.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore - MediumClone</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="container py-12">
+        <div class="flex items-center justify-between mb-8">
+            <h1 class="font-serif" style="font-size: 2.5rem;">Explore</h1>
+            <div class="flex gap-4">
+                <a href="categories.html" class="btn btn-outline text-sm">Categories</a>
+                <a href="search.html" class="btn btn-outline text-sm">Search</a>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="explore-list" class="flex flex-col gap-6 max-w-[800px] mx-auto" style="max-width: 800px; margin: 0 auto;">
+            <!-- Injected via JS -->
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const container = document.getElementById('explore-list');
+            container.innerHTML = Array(4).fill(0).map(() => Components.renderSkeletonCard(true)).join('');
+            try {
+                const blogs = await API.fetchBlogs();
+                container.innerHTML = blogs.map(b => Components.renderBlogCard(b, true)).join('');
+            } catch (e) {
+                container.innerHTML = '<p>Failed to load.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

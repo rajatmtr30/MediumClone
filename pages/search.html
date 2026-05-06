@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - MediumClone</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="container-sm py-12">
+        <div class="mb-8">
+            <input type="text" id="search-input" class="editor-title" style="font-size: 2rem;" placeholder="Search MediumClone...">
+        </div>
+        
+        <div class="flex items-center gap-4 mb-6" style="border-bottom: 1px solid var(--border-color);">
+            <button class="btn btn-ghost" style="border-bottom: 2px solid var(--text-primary); border-radius: 0; padding-bottom: 1rem;">Stories</button>
+            <button class="btn btn-ghost" style="padding-bottom: 1rem;">People</button>
+            <button class="btn btn-ghost" style="padding-bottom: 1rem;">Publications</button>
+            <button class="btn btn-ghost" style="padding-bottom: 1rem;">Tags</button>
+        </div>
+
+        <div id="search-results" class="flex flex-col gap-6">
+            <p class="text-secondary mt-8">Type above to search for stories, people, and publications.</p>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('search-input');
+            const resultsContainer = document.getElementById('search-results');
+            let timeoutId;
+
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(timeoutId);
+                const query = e.target.value.trim();
+                
+                if (!query) {
+                    resultsContainer.innerHTML = '<p class="text-secondary mt-8">Type above to search for stories, people, and publications.</p>';
+                    return;
+                }
+                
+                resultsContainer.innerHTML = Array(3).fill(0).map(() => Components.renderSkeletonCard(true)).join('');
+                
+                timeoutId = setTimeout(async () => {
+                    try {
+                        const results = await API.searchBlogs(query);
+                        if (results.length === 0) {
+                            resultsContainer.innerHTML = `<p class="text-secondary mt-8">No results found for "${query}".</p>`;
+                        } else {
+                            resultsContainer.innerHTML = results.map(b => Components.renderBlogCard(b, true)).join('');
+                        }
+                    } catch (error) {
+                        resultsContainer.innerHTML = '<p class="text-secondary mt-8">Error performing search.</p>';
+                    }
+                }, 500);
+            });
+            
+            // Auto focus
+            searchInput.focus();
+        });
+    </script>
+</body>
+</html>
